@@ -2,6 +2,7 @@
  * Created by pooja on 8/4/16.
  */
 
+'use strict';
 
 var fs = require('fs-extra');
 var backUp = require('./backUp');

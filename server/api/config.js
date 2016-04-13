@@ -9,7 +9,7 @@ module.exports = {
         fileName: '',
         backUpCount: '9999',
         backUpTime: {
-            backUpHour: '10',
+            backUpHour: '10', //Only in 24 hours time
             backUpMinute: '42',
             backUpSecond: '20'
         },
