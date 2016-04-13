@@ -9,9 +9,9 @@ module.exports = {
         fileName: '',
         backUpCount: '9999',
         backUpTime: {
-            backUpHour: '1',
-            backUpMinute: '38',
-            backUpSecond: '59'
+            backUpHour: '10',
+            backUpMinute: '42',
+            backUpSecond: '20'
         },
         fileFormat: '',
         folderName: ''

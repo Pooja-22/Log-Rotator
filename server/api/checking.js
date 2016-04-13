@@ -1,11 +1,21 @@
 /**
- * Created by pooja on 12/4/16.
+ * Created by pooja on 13/4/16.
  */
+
 
 var logger = require('./logger');
 
-var obj = {
-    fileName :'pooja'
+logger.config.logger_config = {
+    fileName:'pooja'
 };
-logger.config.logger_config = obj;
 
+//console.log("i am in");
+//
+//function a(){
+//    logger.log('trying and checking')
+//}
+//
+//setTimeout(a,20000);
+//
+//setTimeout(a,62000);
+logger.log('lllllllll')

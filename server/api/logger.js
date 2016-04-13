@@ -2,6 +2,7 @@
  * Created by pooja on 8/4/16.
  */
 
+
 var fs = require('fs-extra');
 var backUp = require('./backUp');
 require('./objectProperties');
@@ -10,7 +11,27 @@ exports.config = config;
 
 var date = new Date();
 
-(function(){
+/**
+ * save the data to local file(logFile)
+ * @param data
+ */
+
+exports.log = function (data) {
+    var date = new Date();
+    var filename = __fileName;
+    var line = __line;
+    var logData = 'FileName : ' + filename + ' ' + ' #Line : ' + line + ' ' + ' At : ' + date + '\nLoggedData :' + data + '\n';
+    fs.appendFile('logFile', logData, function (err) {
+        if (err) {
+            console.log(err);
+        }
+        else {
+            console.log('Your log is saved to a local file\nYour Log:', data);
+        }
+    });
+};
+
+(function () {
 
     var hour, minutes, seconds, count = 0;
     var timeDifference = {
@@ -44,18 +65,25 @@ var date = new Date();
         timeDifference.secondDifference = parseInt(timeDifference.secondDifference, 10);
     }
 
-    var a = setInterval(backUpSchedule , 1000);
+    var callBackUpSchedule = setInterval(backUpSchedule, 1000);
 
     /**
-     * take backup of the logFile at a certain time
+     * take backup of the logFile at  defined time
      */
 
     function backUpSchedule() {
 
         var date = new Date();
+
+        /**
+         * Check if its back up time
+         */
+
         if (date.getHours() == hour && date.getMinutes() == minutes && date.getSeconds() == seconds) {
-            while (count != config.logger_config.backUpCount) {
-                backUp.backUp(date);
+            if (count != config.logger_config.backUpCount) {
+                if (fs.existsSync('logFile')) {
+                    backUp.backUp(date);
+                }
                 count++;
                 hour = Number(hour) + timeDifference.hourDifference;
                 minutes = Number(minutes) + timeDifference.minuteDifference;
@@ -68,9 +96,12 @@ var date = new Date();
                     minutes = Number(minutes) + 1;
                     seconds = Number(seconds) - 60;
                 }
-                break;
             }
         }
+
+        /**
+         * Resetting the values once a count completes for the day
+         */
 
         if (count == config.logger_config.backUpCount) {
             count = 0;
@@ -81,22 +112,6 @@ var date = new Date();
     }
 }());
 
-/**
- * save the data to local file(logFile)
- * @param data
- */
 
-exports.log = function (data) {
-    var date = new Date();
-    var filename = __fileName;
-    var line = __line;
-    var logData = 'FileName : ' + filename + ' ' + ' #Line : ' + line + ' ' + ' At : ' + date + '\nLoggedData :' + data + '\n';
-    fs.appendFile('logFile', logData, function (err) {
-        if (err) {
-            console.log(err);
-        }
-        else {
-            console.log('Your log is saved to a local file\nYour Log:', data);
-        }
-    });
-};
+
+
