@@ -6,11 +6,15 @@ angular.module('logRotator')
 
     .controller('AdminCtrl', ['$scope', 'fileService', '$state', function ($scope, fileService, $state) {
 
-        $scope.showList = false;
+        $scope.showFilesNames = false;
+        $scope.showFoldersNames = false;
 
-        $scope.call = function(){
-            $scope.showList = !$scope.showList;
-            console.log(".......................")
+        $scope.showFiles = function(){
+            $scope.showFilesNames = ! $scope.showFilesNames;
+        };
+
+        $scope.showFolders = function(){
+            $scope.showFoldersNames = ! $scope.showFoldersNames;
         };
 
         /**
@@ -28,9 +32,10 @@ angular.module('logRotator')
          * @param folder
          */
 
-        $scope.displayFileNames = function (folder) {
+        $scope.displayFileNames = function (folder,index) {
             if (folder.indexOf('.') === 0) {
                 alert('Invalid Folder');
+                $scope.message = "This folder is Invalid";
                 return;
             }
             $scope.folderName = folder;
@@ -38,9 +43,11 @@ angular.module('logRotator')
                 if (data.length === 0) {
                     $scope.fileNames = '';
                     $scope.message = "This folder is empty";
+                    $scope.index = index;
                 } else {
                     $scope.message = '';
                     $scope.fileNames = data;
+                    $scope.index = index;
                 }
             });
         };

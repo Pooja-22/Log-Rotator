@@ -1,46 +1,44 @@
 <div class="row">
-    <div class="col-lg-5" id="sidebar">
+    <div class="col-lg-6" id="sidebar">
         <span>Logs</span>
     </div>
-    <div class="col-lg-19" id="main">
+    <div class="col-lg-18" id="main">
         <span style="position:absolute;right:40px;color: #fff;">Admin</span>
     </div>
 </div>
 
 <div class="row">
-    <div class="col-lg-5" id="logsStructure">
+    <div class="col-lg-6" id="logsStructure">
         <div class="col-lg-24" id='innerSidebar'>
-            <a ui-sref=".folders" ng-click="displayFolders()">
-                <span class="folder">Folder</span>
-            </a>
-
-            <div id="foldersList">
-                <div ng-repeat="folder in foldersName" style="background: #b8c7ce;padding: 0px;">
-                    <a ui-sref=".folders.files" ng-click="displayFileNames(folder)">
-                        <span id="subFolder" ng-click="call()">{{folder}}</span>
+            <ul>
+                <li>
+                    <a ui-sref=".folders" ng-click="displayFolders()">
+                        <span class="folder" ng-click="showFolders()">Folder</span>
                     </a>
-                </div>
-                <div ng-repeat="file in fileNames" ng-show="showList">
-                    <a ui-sref=".folders.files.fileData" ng-click="displayFileData(file)">
-                        <span id="file">{{file}}</span>
-                    </a>
-                </div>
-            </div>
+                </li>
+                <ul>
+                    <li ng-repeat="folder in foldersName" ng-show="showFoldersNames">
+                        <a ui-sref=".folders.files" ng-click="displayFileNames(folder,$index)">
+                            <span id="subFolder" ng-click="showFiles()">{{folder}}</span>
+                        </a>
+                        <ul>
+                            <li ng-repeat="file in fileNames" ng-show="showFilesNames && index === $parent.$index">
+                                <a ui-sref=".folders.files.fileData" ng-click="displayFileData(file)">
+                                    <span id="file">{{file}}</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </ul>
         </div>
     </div>
-    <div class="col-lg-19" ui-view="">
+    {{showFoldersNames}}
+
+    <div class="col-lg-18" ui-view="">
 
     </div>
 </div>
-
-<script>
-    $(document).ready(function () {
-        $(".folder").click(function () {
-            $("#foldersList").slideToggle(400);
-        });
-    });
-</script>
-
 
 
 
