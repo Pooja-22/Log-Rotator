@@ -6,16 +6,16 @@ angular.module('logRotator')
 
     .controller('AdminCtrl', ['$scope', 'fileService', '$state', function ($scope, fileService, $state) {
 
-        $scope.showFilesNames = false;
-        $scope.showFoldersNames = false;
+        $scope.showFilesNames = true;
+        $scope.showFoldersNames = true;
 
-        $scope.showFiles = function(){
-            $scope.showFilesNames = ! $scope.showFilesNames;
-        };
-
-        $scope.showFolders = function(){
-            $scope.showFoldersNames = ! $scope.showFoldersNames;
-        };
+        //$scope.showFiles = function(){
+        //    $scope.showFilesNames = ! $scope.showFilesNames;
+        //};
+        //
+        //$scope.showFolders = function(){
+        //    $scope.showFoldersNames = ! $scope.showFoldersNames;
+        //};
 
         /**
          * Display all the folders
