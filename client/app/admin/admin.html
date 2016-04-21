@@ -15,12 +15,12 @@
                 <div ng-init="displayFolders()">
                     <span>Log Files</span>
                 </div>
-                <ol type  = I>
+                <ol type  = 1>
                     <li ng-repeat="folder in foldersName">
                         <a ui-sref=".folders.files" ng-click="displayFileNames(folder,$index);showFiles()">
                             <span id="subFolder">{{folder}}</span>
                         </a>
-                        <ol type = i>
+                        <ol type  = 1>
                             <li ng-repeat="file in fileNames" ng-show="index === $parent.$index">
                                 <a ui-sref=".folders.files.fileData" ng-click="displayFileData(file)">
                                     <span id="file">{{file}}</span>
@@ -31,7 +31,7 @@
                 </ol>
             </div>
         </div>
-        <div class="col-lg-18" ui-view=""></div>
+        <div class="col-lg-18" ui-view="" style="overflow-y:scroll;overflow:auto;max-height: 600px;"></div>
     </div>
 </div>
 

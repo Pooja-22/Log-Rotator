@@ -32,6 +32,7 @@ body, html {
     line-height: 40px;
     padding: 0px;
     margin: 0px;
+    position: static;
 }
 #innerSidebar{
     background: #b8c7ce;

@@ -9,6 +9,7 @@ var backUp = require('./backUp');
 require('./objectProperties');
 var config = require('./config');
 exports.config = config;
+var colors = require('colors');
 
 var date = new Date();
 
@@ -17,20 +18,34 @@ var date = new Date();
  * @param data
  */
 
-exports.log = function (type, data) {
+exports.log = function (data) {
+    saveLogs('Log', data);
+};
+exports.warn = function (data) {
+    saveLogs('Warning', data);
+};
+exports.error = function (data) {
+    saveLogs('Error', data);
+};
+exports.info = function (data) {
+    saveLogs('Info', data);
+};
+
+function saveLogs(type, data) {
+
     var date = new Date();
     var filename = __fileName;
     var line = __line;
-    var logData = 'FileName : ' + filename + ' ' + ' #Line : ' + line + ' ' + ' At : ' + date + '\nLoggedData :' + data + '\n';
+    var logData = type + "---" + 'FileName : ' + filename + '   ' + ' #Line : ' + line + '   ' + ' At : ' + date + '\nLoggedData : ' + data + '\n\n';
     fs.appendFile('logFile', logData, function (err) {
         if (err) {
             console.log(err);
         }
         else {
-            console.log('Your log is saved to a local file\nYour Log:', data);
+            console.log('log is saved to a local file\n' + type + ':', data);
         }
     });
-};
+}
 
 (function () {
 
