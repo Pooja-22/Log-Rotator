@@ -1,4 +1,5 @@
 <div class="row" style="height: 100%;">
+
     <div class="row">
         <div class="col-lg-6" id="sidebar">
             <span>Logs</span>
@@ -14,20 +15,20 @@
                 <div ng-init="displayFolders()">
                     <span>Log Files</span>
                 </div>
-                <ul>
+                <ol type  = I>
                     <li ng-repeat="folder in foldersName">
                         <a ui-sref=".folders.files" ng-click="displayFileNames(folder,$index);showFiles()">
                             <span id="subFolder">{{folder}}</span>
                         </a>
-                        <ul>
-                            <li ng-repeat="file in fileNames" ng-show="showFilesNames &&index === $parent.$index">
+                        <ol type = i>
+                            <li ng-repeat="file in fileNames" ng-show="index === $parent.$index">
                                 <a ui-sref=".folders.files.fileData" ng-click="displayFileData(file)">
                                     <span id="file">{{file}}</span>
                                 </a>
                             </li>
-                        </ul>
+                        </ol>
                     </li>
-                </ul>
+                </ol>
             </div>
         </div>
         <div class="col-lg-18" ui-view=""></div>

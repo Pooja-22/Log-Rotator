@@ -6,7 +6,6 @@ angular.module('logRotator')
 
     .controller('AdminCtrl', ['$scope', 'fileService', '$state', function ($scope, fileService, $state) {
 
-
         /**
          * Display all the folders
          */
