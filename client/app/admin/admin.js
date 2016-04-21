@@ -16,19 +16,19 @@ angular.module('logRotator')
 
             .state('admin.folders', {
                 url: '/folders',
-                templateUrl: 'app/admin/views/folders.html',
+                templateUrl: 'app/admin/Views/folders.html',
                 controller: 'AdminCtrl'
             })
 
             .state('admin.folders.files', {
                 url: '/files',
-                templateUrl: 'app/admin/views/files.html',
+                templateUrl: 'app/admin/Views/files.html',
                 controller: 'AdminCtrl'
             })
 
             .state('admin.folders.files.fileData', {
                 url: '/',
-                templateUrl: 'app/admin/views/fileData.html',
+                templateUrl: 'app/admin/Views/fileData.html',
                 controller: 'AdminCtrl'
             });
 

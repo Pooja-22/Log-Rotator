@@ -2266,7 +2266,7 @@ function $StateProvider(   $urlRouterProvider,   $urlMatcherFactory) {
 
     // If there is no explicit multi-view configuration, make one up so we don't have
     // to handle both cases in the view directive later. Note that having an explicit
-    // 'views' property will mean the default unnamed view properties are ignored. This
+    // 'Views' property will mean the default unnamed view properties are ignored. This
     // is also a good time to resolve view names to absolute names, so everything is a
     // straight lookup at link time.
     views: function(state) {
@@ -2476,9 +2476,9 @@ function $StateProvider(   $urlRouterProvider,   $urlMatcherFactory) {
    *   navigable).
    * - **params** `{object}` - returns an array of state params that are ensured to 
    *   be a super-set of parent's params.
-   * - **views** `{object}` - returns a views object where each key is an absolute view 
+   * - **Views** `{object}` - returns a Views object where each key is an absolute view
    *   name (i.e. "viewName@stateName") and each value is the config object 
-   *   (template, controller) for the view. Even when you don't use the views object 
+   *   (template, controller) for the view. Even when you don't use the Views object
    *   explicitly on a state config, one is still created for you internally.
    *   So by decorating this builder function you have access to decorating template 
    *   and controller properties.
@@ -2491,13 +2491,13 @@ function $StateProvider(   $urlRouterProvider,   $urlMatcherFactory) {
    *
    * @example
    * <pre>
-   * // Override the internal 'views' builder with a function that takes the state
+   * // Override the internal 'Views' builder with a function that takes the state
    * // definition, and a reference to the internal function being overridden:
-   * $stateProvider.decorator('views', function (state, parent) {
+   * $stateProvider.decorator('Views', function (state, parent) {
    *   var result = {},
-   *       views = parent(state);
+   *       Views = parent(state);
    *
-   *   angular.forEach(views, function (config, name) {
+   *   angular.forEach(Views, function (config, name) {
    *     var autoName = (state.name + '.' + name).replace('.', '/');
    *     config.templateUrl = config.templateUrl || '/partials/' + autoName + '.html';
    *     result[name] = config;
@@ -2506,7 +2506,7 @@ function $StateProvider(   $urlRouterProvider,   $urlMatcherFactory) {
    * });
    *
    * $stateProvider.state('home', {
-   *   views: {
+   *   Views: {
    *     'contact.list': { controller: 'ListController' },
    *     'contact.item': { controller: 'ItemController' }
    *   }
@@ -2515,7 +2515,7 @@ function $StateProvider(   $urlRouterProvider,   $urlMatcherFactory) {
    * // ...
    *
    * $state.go('home');
-   * // Auto-populates list and item views with /partials/home/contact/list.html,
+   * // Auto-populates list and item Views with /partials/home/contact/list.html,
    * // and /partials/home/contact/item.html, respectively.
    * </pre>
    *
@@ -2683,15 +2683,15 @@ function $StateProvider(   $urlRouterProvider,   $urlMatcherFactory) {
    * url: "/messages/:mailboxid?{before:date}&{after:date}"
    * </pre>
    *
-   * @param {object=} stateConfig.views
-   * <a id='views'></a>
-   * an optional map&lt;string, object&gt; which defined multiple views, or targets views
+   * @param {object=} stateConfig.Views
+   * <a id='Views'></a>
+   * an optional map&lt;string, object&gt; which defined multiple Views, or targets Views
    * manually/explicitly.
    *
    * Examples:
    *
    * Targets three named `ui-view`s in the parent state's template
-   * <pre>views: {
+   * <pre>Views: {
    *     header: {
    *       controller: "headerCtrl",
    *       templateUrl: "header.html"
@@ -2705,7 +2705,7 @@ function $StateProvider(   $urlRouterProvider,   $urlMatcherFactory) {
    *   }</pre>
    *
    * Targets named `ui-view="header"` from grandparent state 'top''s template, and named `ui-view="body" from parent state's template.
-   * <pre>views: {
+   * <pre>Views: {
    *     'header@top': {
    *       controller: "msgHeaderCtrl",
    *       templateUrl: "msgHeader.html"
@@ -3083,9 +3083,9 @@ function $StateProvider(   $urlRouterProvider,   $urlMatcherFactory) {
      *    defines which state to be relative from.
      * - **`notify`** - {boolean=true}, If `true` will broadcast $stateChangeStart and $stateChangeSuccess events.
      * - **`reload`** (v0.2.5) - {boolean=false|string|object}, If `true` will force transition even if no state or params
-     *    have changed.  It will reload the resolves and views of the current state and parent states.
+     *    have changed.  It will reload the resolves and Views of the current state and parent states.
      *    If `reload` is a string (or state object), the state object is fetched (by name, or object reference); and \
-     *    the transition reloads the resolves and views for that matched state, and all its children states.
+     *    the transition reloads the resolves and Views for that matched state, and all its children states.
      *
      * @returns {promise} A promise representing the state of the new transition.
      *
@@ -3588,7 +3588,7 @@ function $StateProvider(   $urlRouterProvider,   $urlMatcherFactory) {
       function resolveViews() {
         var viewsPromises = [];
 
-        // Resolve template and dependencies for all views.
+        // Resolve template and dependencies for all Views.
         forEach(state.views, function (view, name) {
           var injectables = (view.resolve && view.resolve !== state.resolve ? view.resolve : {});
           injectables.$template = [ function () {
@@ -3771,8 +3771,8 @@ var ngMinorVer = angular.version.minor;
  * @description
  * The ui-view directive tells $state where to place your templates.
  *
- * @param {string=} name A view name. The name should be unique amongst the other views in the
- * same state. You can have views of the same name that live in different states.
+ * @param {string=} name A view name. The name should be unique amongst the other Views in the
+ * same state. You can have Views of the same name that live in different states.
  *
  * @param {string=} autoscroll It allows you to set the scroll behavior of the browser window
  * when a view is populated. By default, $anchorScroll is overridden by ui-router's custom scroll
@@ -3806,11 +3806,11 @@ var ngMinorVer = angular.version.minor;
  * })
  * </pre>
  * 
- * The above is a convenient shortcut equivalent to specifying your view explicitly with the {@link ui.router.state.$stateProvider#views `views`}
+ * The above is a convenient shortcut equivalent to specifying your view explicitly with the {@link ui.router.state.$stateProvider#views `Views`}
  * config property, by name, in this case an empty name:
  * <pre>
  * $stateProvider.state("home", {
- *   views: {
+ *   Views: {
  *     "": {
  *       template: "<h1>HELLO!</h1>"
  *     }
@@ -3818,7 +3818,7 @@ var ngMinorVer = angular.version.minor;
  * })
  * </pre>
  * 
- * But typically you'll only use the views property if you name your view or have more than one view 
+ * But typically you'll only use the Views property if you name your view or have more than one view
  * in the same template. There's not really a compelling reason to name a view if its the only one, 
  * but you could if you wanted, like so:
  * <pre>
@@ -3826,7 +3826,7 @@ var ngMinorVer = angular.version.minor;
  * </pre> 
  * <pre>
  * $stateProvider.state("home", {
- *   views: {
+ *   Views: {
  *     "main": {
  *       template: "<h1>HELLO!</h1>"
  *     }
@@ -3834,7 +3834,7 @@ var ngMinorVer = angular.version.minor;
  * })
  * </pre>
  * 
- * Really though, you'll use views to set up multiple views:
+ * Really though, you'll use Views to set up multiple Views:
  * <pre>
  * <div ui-view></div>
  * <div ui-view="chart"></div> 
@@ -3843,7 +3843,7 @@ var ngMinorVer = angular.version.minor;
  * 
  * <pre>
  * $stateProvider.state("home", {
- *   views: {
+ *   Views: {
  *     "": {
  *       template: "<h1>HELLO!</h1>"
  *     },

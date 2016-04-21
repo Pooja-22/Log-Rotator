@@ -16,8 +16,8 @@ var ngMinorVer = angular.version.minor;
  * @description
  * The ui-view directive tells $state where to place your templates.
  *
- * @param {string=} name A view name. The name should be unique amongst the other views in the
- * same state. You can have views of the same name that live in different states.
+ * @param {string=} name A view name. The name should be unique amongst the other Views in the
+ * same state. You can have Views of the same name that live in different states.
  *
  * @param {string=} autoscroll It allows you to set the scroll behavior of the browser window
  * when a view is populated. By default, $anchorScroll is overridden by ui-router's custom scroll
@@ -51,11 +51,11 @@ var ngMinorVer = angular.version.minor;
  * })
  * </pre>
  * 
- * The above is a convenient shortcut equivalent to specifying your view explicitly with the {@link ui.router.state.$stateProvider#views `views`}
+ * The above is a convenient shortcut equivalent to specifying your view explicitly with the {@link ui.router.state.$stateProvider#views `Views`}
  * config property, by name, in this case an empty name:
  * <pre>
  * $stateProvider.state("home", {
- *   views: {
+ *   Views: {
  *     "": {
  *       template: "<h1>HELLO!</h1>"
  *     }
@@ -63,7 +63,7 @@ var ngMinorVer = angular.version.minor;
  * })
  * </pre>
  * 
- * But typically you'll only use the views property if you name your view or have more than one view 
+ * But typically you'll only use the Views property if you name your view or have more than one view
  * in the same template. There's not really a compelling reason to name a view if its the only one, 
  * but you could if you wanted, like so:
  * <pre>
@@ -71,7 +71,7 @@ var ngMinorVer = angular.version.minor;
  * </pre> 
  * <pre>
  * $stateProvider.state("home", {
- *   views: {
+ *   Views: {
  *     "main": {
  *       template: "<h1>HELLO!</h1>"
  *     }
@@ -79,7 +79,7 @@ var ngMinorVer = angular.version.minor;
  * })
  * </pre>
  * 
- * Really though, you'll use views to set up multiple views:
+ * Really though, you'll use Views to set up multiple Views:
  * <pre>
  * <div ui-view></div>
  * <div ui-view="chart"></div> 
@@ -88,7 +88,7 @@ var ngMinorVer = angular.version.minor;
  * 
  * <pre>
  * $stateProvider.state("home", {
- *   views: {
+ *   Views: {
  *     "": {
  *       template: "<h1>HELLO!</h1>"
  *     },

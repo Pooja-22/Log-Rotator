@@ -1,0 +1,34 @@
+#sidebar{
+    background: #367FA9;
+    color: #fff;
+    font-size: 20px;
+    line-height: 50px;
+    height: 50px;
+    text-align: center;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-weight: 300;
+    padding: 0px;
+}
+
+#main{
+    background: #3c8dbc;
+    color: #fff;
+    font-size: 20px;
+    line-height: 50px;
+    height: 50px;
+    text-align: center;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    padding: 0 15px;
+    font-weight: 300;
+}
+#logsStructure{
+    height: 100%;
+    line-height: 40px;
+    padding: 0px;
+    margin: 0px;
+}
+#innerSidebar{
+    background: #b8c7ce;
+    height: 100%;
+}
+

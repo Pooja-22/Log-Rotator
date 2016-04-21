@@ -1,0 +1,9 @@
+<div ui-view="">
+    <div ng-repeat="file in fileNames" style="float: left;padding: 10px;">
+        <a ui-sref=".fileData" ng-click="displayFileData(file)">
+            <span><img src="http://newstatelinespeedway.com/images/file.png"
+                       style="height: 50px;width: 50px;"></span><br>
+        </a>
+        <span>{{file}}</span>
+    </div>
+    <span>{{message}}</span></div>
