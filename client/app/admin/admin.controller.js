@@ -6,16 +6,6 @@ angular.module('logRotator')
 
     .controller('AdminCtrl', ['$scope', 'fileService', '$state', function ($scope, fileService, $state) {
 
-        $scope.showFilesNames = true;
-        $scope.showFoldersNames = true;
-
-        //$scope.showFiles = function(){
-        //    $scope.showFilesNames = ! $scope.showFilesNames;
-        //};
-        //
-        //$scope.showFolders = function(){
-        //    $scope.showFoldersNames = ! $scope.showFoldersNames;
-        //};
 
         /**
          * Display all the folders
@@ -24,6 +14,7 @@ angular.module('logRotator')
         $scope.displayFolders = function () {
             fileService.get(function (data, err) {
                 $scope.foldersName = data;
+                $state.go('admin.folders');
             });
         };
 
@@ -32,9 +23,10 @@ angular.module('logRotator')
          * @param folder
          */
 
-        $scope.displayFileNames = function (folder,index) {
+        $scope.displayFileNames = function (folder, index) {
             if (folder.indexOf('.') === 0) {
                 alert('Invalid Folder');
+                $scope.fileNames = '';
                 $scope.message = "This folder is Invalid";
                 return;
             }

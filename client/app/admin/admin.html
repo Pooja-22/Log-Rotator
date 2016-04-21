@@ -1,28 +1,26 @@
-<div class="row">
-    <div class="col-lg-6" id="sidebar">
-        <span>Logs</span>
+<div class="row" style="height: 100%;">
+    <div class="row">
+        <div class="col-lg-6" id="sidebar">
+            <span>Logs</span>
+        </div>
+        <div class="col-lg-18" id="main">
+            <span style="position:absolute;right:40px;color: #fff;">Admin</span>
+        </div>
     </div>
-    <div class="col-lg-18" id="main">
-        <span style="position:absolute;right:40px;color: #fff;">Admin</span>
-    </div>
-</div>
 
-<div class="row">
-    <div class="col-lg-6" id="logsStructure">
-        <div class="col-lg-24" id='innerSidebar'>
-            <ul>
-                <li>
-                    <a ui-sref=".folders" ng-click="displayFolders()">
-                        <span class="folder" ng-click="showFolders()">Folder</span>
-                    </a>
-                </li>
+    <div class="row" style="height: 94%;">
+        <div class="col-lg-6" id="logsStructure">
+            <div class="col-lg-24" id='innerSidebar'>
+                <div ng-init="displayFolders()">
+                    <span>Log Files</span>
+                </div>
                 <ul>
-                    <li ng-repeat="folder in foldersName" ng-show="showFoldersNames">
-                        <a ui-sref=".folders.files" ng-click="displayFileNames(folder,$index)">
-                            <span id="subFolder" ng-click="showFiles()">{{folder}}</span>
+                    <li ng-repeat="folder in foldersName">
+                        <a ui-sref=".folders.files" ng-click="displayFileNames(folder,$index);showFiles()">
+                            <span id="subFolder">{{folder}}</span>
                         </a>
                         <ul>
-                            <li ng-repeat="file in fileNames" ng-show="showFilesNames && index === $parent.$index">
+                            <li ng-repeat="file in fileNames" ng-show="showFilesNames &&index === $parent.$index">
                                 <a ui-sref=".folders.files.fileData" ng-click="displayFileData(file)">
                                     <span id="file">{{file}}</span>
                                 </a>
@@ -30,12 +28,9 @@
                         </ul>
                     </li>
                 </ul>
-            </ul>
+            </div>
         </div>
-    </div>
-
-    <div class="col-lg-18" ui-view="">
-
+        <div class="col-lg-18" ui-view=""></div>
     </div>
 </div>
 

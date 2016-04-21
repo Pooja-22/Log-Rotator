@@ -16,4 +16,3 @@ router.get('/:folder/:file', backUp.displayFileData);
 
 module.exports = router;
 
-console.log("")

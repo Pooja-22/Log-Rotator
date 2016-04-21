@@ -1,7 +1,7 @@
 
 <div ui-view="">
     <div ng-repeat="folder in foldersName" style="float: left;padding: 10px;" >
-        <a ui-sref=".files" ng-click="displayFileNames(folder,$index);showFiles()" >
+        <a ui-sref=".files" ng-click="displayFileNames(folder,$index);showFiles()">
             <span><img src="https://lh5.ggpht.com/Iy2SF6C-E54bW_AwwPfymQ__MqQgx_iPRnVjvsgI0BbXA3FFiJDU6R6EcqXAZQ9iviRT=w170" style="height: 50px;width: 50px;"></span><br>
         </a>
         <span id="subFolder" ng-click="showFiles()">{{folder}}</span>
