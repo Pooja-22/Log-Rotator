@@ -1,8 +1,48 @@
-<a href="" ng-click="displayFileNames()"><span>Folder</span></a>
-
-<div ng-repeat="data in fileNames">
-      <a href='' ng-click="displayFileData(data)"><span>{{data}}</span></a>
+<div class="row">
+    <div class="col-lg-5" id="sidebar">
+        <span>Logs</span>
+    </div>
+    <div class="col-lg-19" id="main">
+        <span style="position:absolute;right:40px;color: #fff;">Admin</span>
+    </div>
 </div>
 
-        File Data : {{fileData}}
+<div class="row">
+    <div class="col-lg-5" id="logsStructure">
+        <div class="col-lg-24" id='innerSidebar'>
+            <a ui-sref=".folders" ng-click="displayFolders()">
+                <span class="folder">Folder</span>
+            </a>
+
+            <div id="foldersList">
+                <div ng-repeat="folder in foldersName" style="background: #b8c7ce;padding: 0px;">
+                    <a ui-sref=".folders.files" ng-click="displayFileNames(folder)">
+                        <span id="subFolder" ng-click="call()">{{folder}}</span>
+                    </a>
+                </div>
+                <div ng-repeat="file in fileNames" ng-show="showList">
+                    <a ui-sref=".folders.files.fileData" ng-click="displayFileData(file)">
+                        <span id="file">{{file}}</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-19" ui-view="">
+
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $(".folder").click(function () {
+            $("#foldersList").slideToggle(400);
+        });
+    });
+</script>
+
+
+
+
+
 

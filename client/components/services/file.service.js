@@ -3,13 +3,25 @@
  */
 
 angular.module('logRotator')
+
     .factory('fileService', ['$resource', function ($resource) {
-        return $resource('/api/backUp/:file', {}, {
-            getFilesName: {
+
+        return $resource('/api/backUp/:folder/:file', {}, {
+
+            /**
+             * Get request to retrieve folder and file names
+             */
+
+            get: {
                 method: 'GET',
                 isArray: true
             },
-            getFileData: {
+
+            /**
+             * Get request to retrieve file data
+             */
+
+            getFilesData: {
                 method: 'GET'
             }
         });

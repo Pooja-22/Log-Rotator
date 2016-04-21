@@ -9,10 +9,11 @@ var backUp = require('./backUp');
 
 var router = express.Router();
 
-router.get('/', backUp.displayFilesName);
-router.get('/:file', backUp.displayFileData);
-
+router.get('/', backUp.displayFolders);
+router.get('/:folder', backUp.displayFilesNames);
+router.get('/:folder/:file', backUp.displayFileData);
 
 
 module.exports = router;
 
+console.log("")

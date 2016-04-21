@@ -17,7 +17,7 @@ var date = new Date();
  * @param data
  */
 
-exports.log = function (data) {
+exports.log = function (type, data) {
     var date = new Date();
     var filename = __fileName;
     var line = __line;
@@ -80,6 +80,8 @@ exports.log = function (data) {
          * Check if its back up time
          */
 
+        console.log(date.getHours(), hour, date.getMinutes(), minutes, date.getSeconds(), seconds)
+
         if (date.getHours() == hour && date.getMinutes() == minutes && date.getSeconds() == seconds) {
             if (count != config.logger_config.backUpCount) {
                 if (fs.existsSync('logFile')) {
@@ -88,12 +90,12 @@ exports.log = function (data) {
                 count++;
                 hour = Number(hour) + timeDifference.hourDifference;
                 minutes = Number(minutes) + timeDifference.minuteDifference;
-                if (minutes > 60) {
+                if (minutes == 60 || 0 || minutes > 60) {
                     hour = Number(hour) + 1;
                     minutes = Number(minutes) - 60;
                 }
                 seconds = Number(seconds) + timeDifference.secondDifference;
-                if (seconds > 60) {
+                if (seconds == 60 || 0 || seconds > 60) {
                     minutes = Number(minutes) + 1;
                     seconds = Number(seconds) - 60;
                 }
