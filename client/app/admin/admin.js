@@ -10,26 +10,22 @@ angular.module('logRotator')
 
             .state('admin', {
                 url: '/admin',
-                templateUrl: 'app/admin/admin.html',
-                controller: 'AdminCtrl'
+                templateUrl: 'app/admin/admin.html'
             })
 
             .state('admin.folders', {
                 url: '/folders',
-                templateUrl: 'app/admin/Views/folders.html',
-                controller: 'AdminCtrl'
+                templateUrl: 'app/admin/Views/folders.html'
             })
 
             .state('admin.folders.files', {
                 url: '/files',
-                templateUrl: 'app/admin/Views/files.html',
-                controller: 'AdminCtrl'
+                templateUrl: 'app/admin/Views/files.html'
             })
 
             .state('admin.folders.files.fileData', {
                 url: '/',
-                templateUrl: 'app/admin/Views/fileData.html',
-                controller: 'AdminCtrl'
+                templateUrl: 'app/admin/Views/fileData.html'
             });
 
     }]);

@@ -15,14 +15,14 @@
                 <div ng-init="displayFolders()">
                     <span>Log Files</span>
                 </div>
-                <ol type  = 1>
+                <ol type=1>
                     <li ng-repeat="folder in foldersName">
-                        <a ui-sref=".folders.files" ng-click="displayFileNames(folder,$index);showFiles()">
+                        <a ui-sref=".folders.files" ng-click="displayFileNames(folder,$index)">
                             <span id="subFolder">{{folder}}</span>
                         </a>
-                        <ol type  = 1>
+                        <ol type=1>
                             <li ng-repeat="file in fileNames" ng-show="index === $parent.$index">
-                                <a ui-sref=".folders.files.fileData" ng-click="displayFileData(file)">
+                                <a href="" ng-click="displayFileData(file)">
                                     <span id="file">{{file}}</span>
                                 </a>
                             </li>

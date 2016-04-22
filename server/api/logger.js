@@ -3,33 +3,54 @@
  */
 
 'use strict';
-
 var fs = require('fs-extra');
 var backUp = require('./backUp');
 require('./objectProperties');
 var config = require('./config');
 exports.config = config;
-var colors = require('colors');
 
 var date = new Date();
 
 /**
- * save the data to local file(logFile)
+ * Simple Log
  * @param data
  */
 
 exports.log = function (data) {
     saveLogs('Log', data);
 };
+
+/**
+ * Any Warning
+ * @param data
+ */
+
 exports.warn = function (data) {
     saveLogs('Warning', data);
 };
+
+/**
+ * Error
+ * @param data
+ */
+
 exports.error = function (data) {
     saveLogs('Error', data);
 };
+
+/**
+ * Info
+ * @param data
+ */
+
 exports.info = function (data) {
     saveLogs('Info', data);
 };
+
+/**
+ * save the data to local file(logFile)
+ * @param data
+ */
 
 function saveLogs(type, data) {
 
