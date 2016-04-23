@@ -4,6 +4,7 @@
 
 module.exports = function (app) {
 
-    // Insert routes below
+    //  routes
+
     app.use('/api/backUp', require('./server/api'));
 };

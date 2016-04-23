@@ -1,41 +1,43 @@
 <div class="row" style="height: 100%;">
 
     <div class="row">
-        <div class="col-lg-6" id="sidebar">
+        <div class="col-lg-3" id="sidebar">
             <span>Logs</span>
         </div>
-        <div class="col-lg-18" id="main">
+        <div class="col-lg-9" id="main">
+            <a href="" data-toggle="tooltip" title="Back" ng-click="back()">
+                <span style="position: absolute;left: 10px;padding: 12px;color: #ffffff;"
+                      class="glyphicon glyphicon-arrow-left">
+                </span>
+            </a>
             <span style="position:absolute;right:40px;color: #fff;">Admin</span>
         </div>
     </div>
 
     <div class="row" style="height: 94%;">
-        <div class="col-lg-6" id="logsStructure">
-            <div class="col-lg-24" id='innerSidebar'>
-                <div ng-init="displayFolders()">
-                    <span>Log Files</span>
-                </div>
-                <ol type=1>
-                    <li ng-repeat="folder in foldersName">
-                        <a ui-sref=".folders.files" ng-click="displayFileNames(folder,$index)">
-                            <span id="subFolder">{{folder}}</span>
-                        </a>
-                        <ol type=1>
-                            <li ng-repeat="file in fileNames" ng-show="index === $parent.$index">
-                                <a href="" ng-click="displayFileData(file)">
-                                    <span id="file">{{file}}</span>
-                                </a>
-                            </li>
-                        </ol>
-                    </li>
-                </ol>
+        <div class="col-lg-3" id="logsStructure">
+            <div ng-init="displayFolders()">
+                <span>Log Files</span>
             </div>
+            <ol type=1 style="padding-left: 10px;">
+                <li ng-repeat="folder in foldersName">
+                    <a ui-sref=".folders.files" ng-click="displayFileNames(folder,$index)">
+                        <span id="subFolder">{{folder}}</span>
+                    </a>
+                    <ol type=1 style="padding-left: 30px;">
+                        <li ng-repeat="file in fileNames" ng-show="index === $parent.$index">
+                            <a href="" ng-click="displayFileData(file)">
+                                <span id="file">{{file}}</span>
+                            </a>
+                        </li>
+                    </ol>
+                </li>
+            </ol>
         </div>
-        <div class="col-lg-18" ui-view="" style="overflow-y:scroll;overflow:auto;max-height: 600px;"></div>
+        <div class="col-lg-9" ui-view="" style="overflow-y:scroll;overflow:auto;height: 100%;"></div>
     </div>
+
 </div>
-
-
 
 
 

@@ -1,0 +1,61 @@
+<form class="form-login">
+
+    <div class="form-log-in-with-email">
+
+        <div class="form-white-background">
+
+            <div class="form-title-row">
+                <h1>Configurations</h1>
+            </div>
+
+            <div class="form-row">
+                <label>
+                    <span data-target="tooltip" title="Complete Path">File Path</span>
+                    <input type="text" ng-model="filePath" placeholder="Ex : /home/pooja/Desktop">
+                </label>
+            </div>
+
+            <div class="form-row">
+                <label>
+                    <span>File Name</span>
+                    <input type="text" ng-model="fileName">
+                </label>
+            </div>
+
+            <div class="form-row">
+                <label>
+                    <span>Count</span>
+                    <input type="number" ng-model="backUpCount" placeholder="Back Up Count">
+                </label>
+            </div>
+
+            <div class="form-row">
+                <label>
+                    <span>Time</span>
+                    <input type="number" ng-model="backUpHour" placeholder="Hour(24-Hour time)">
+                </label>
+            </div>
+
+            <div class="form-row" style="margin-left: 129px;">
+                <label>
+                    <input type="number" ng-model="backUpMinute" placeholder="Minutes">
+                </label>
+            </div>
+
+            <div class="form-row"  style="margin-left: 129px;">
+                <label>
+                    <input type="number" ng-model="backUpSecond" placeholder="Seconds">
+                </label>
+            </div>
+
+
+            <div class="form-row">
+                <button ng-click = "save()" >Save</button>
+            </div>
+
+        </div>
+    </div>
+
+    </div>
+
+</form>

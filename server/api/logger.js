@@ -3,13 +3,14 @@
  */
 
 'use strict';
-var fs = require('fs-extra');
+var fs = require('fs');
 var backUp = require('./backUp');
 require('./objectProperties');
 var config = require('./config');
 exports.config = config;
 
 var date = new Date();
+var tempLogFile = config.logger_config.tempLogFilePath || 'logFile';
 
 /**
  * Simple Log
@@ -48,7 +49,7 @@ exports.info = function (data) {
 };
 
 /**
- * save the data to local file(logFile)
+ * save the data to local file(tempLogFile)
  * @param data
  */
 
@@ -58,7 +59,7 @@ function saveLogs(type, data) {
     var filename = __fileName;
     var line = __line;
     var logData = type + "---" + 'FileName : ' + filename + '   ' + ' #Line : ' + line + '   ' + ' At : ' + date + '\nLoggedData : ' + data + '\n\n';
-    fs.appendFile('logFile', logData, function (err) {
+    fs.appendFile(tempLogFile, logData, function (err) {
         if (err) {
             console.log(err);
         }
@@ -67,6 +68,10 @@ function saveLogs(type, data) {
         }
     });
 }
+
+/**
+ * calculate time difference and call back up
+ */
 
 (function () {
 
@@ -87,7 +92,6 @@ function saveLogs(type, data) {
     var tempHour = timeDifference.hourDifference.toString();
 
     if (/\d+(\.\d+)?/.test(tempHour)) {
-
         var hourDecimalPart = timeDifference.hourDifference - parseInt(timeDifference.hourDifference, 10);
         timeDifference.minuteDifference = hourDecimalPart * 60;
         var tempMinute = timeDifference.minuteDifference.toString();
@@ -105,7 +109,7 @@ function saveLogs(type, data) {
     var callBackUpSchedule = setInterval(backUpSchedule, 1000);
 
     /**
-     * take backup of the logFile at  defined time
+     * take backup of the tempLogFile at  defined time
      */
 
     function backUpSchedule() {
@@ -116,24 +120,24 @@ function saveLogs(type, data) {
          * Check if its back up time
          */
 
-        console.log(date.getHours(), hour, date.getMinutes(), minutes, date.getSeconds(), seconds)
+        console.log(date.getHours(), hour, date.getMinutes(), minutes, date.getSeconds(), seconds);
 
         if (date.getHours() == hour && date.getMinutes() == minutes && date.getSeconds() == seconds) {
             if (count != config.logger_config.backUpCount) {
-                if (fs.existsSync('logFile')) {
-                    backUp.backUp(date);
+                if (fs.existsSync(tempLogFile)) {
+                    backUp.backUp(date, tempLogFile);
                 }
                 count++;
-                hour = Number(hour) + timeDifference.hourDifference;
-                minutes = Number(minutes) + timeDifference.minuteDifference;
+                hour = hour + timeDifference.hourDifference;
+                minutes = minutes + timeDifference.minuteDifference;
                 if (minutes == 60 || 0 || minutes > 60) {
-                    hour = Number(hour) + 1;
-                    minutes = Number(minutes) - 60;
+                    hour = hour + 1;
+                    minutes = minutes - 60;
                 }
-                seconds = Number(seconds) + timeDifference.secondDifference;
+                seconds = (seconds) + timeDifference.secondDifference;
                 if (seconds == 60 || 0 || seconds > 60) {
-                    minutes = Number(minutes) + 1;
-                    seconds = Number(seconds) - 60;
+                    minutes = minutes + 1;
+                    seconds = seconds - 60;
                 }
             }
         }

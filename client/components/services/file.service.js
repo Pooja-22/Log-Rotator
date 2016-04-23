@@ -23,6 +23,15 @@ angular.module('logRotator')
 
             getFilesData: {
                 method: 'GET'
+            },
+
+            /**
+             * Save configurations
+             */
+
+            saveConfigurations: {
+                method: 'POST'
             }
+
         });
     }]);

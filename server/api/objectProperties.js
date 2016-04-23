@@ -3,9 +3,9 @@
  */
 
 Object.defineProperty(global, '__stack', {
-    get: function() {
+    get: function () {
         var orig = Error.prepareStackTrace;
-        Error.prepareStackTrace = function(_, stack) {
+        Error.prepareStackTrace = function (_, stack) {
             return stack;
         };
         var err = new Error;
@@ -17,20 +17,18 @@ Object.defineProperty(global, '__stack', {
 });
 
 Object.defineProperty(global, '__line', {
-    get: function() {
-        return __stack[2].getLineNumber();
+    get: function () {
+        return __stack[3].getLineNumber();
     }
 });
-
 
 
 Object.defineProperty(global, '__fileName', {
-    get: function() {
-        return __stack[2].getFileName();
+    get: function () {
+        return __stack[3].getFileName();
     }
 });
 
-module.exports = 'objectProperties';
 
 
 

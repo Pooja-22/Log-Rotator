@@ -28,16 +28,13 @@ body, html {
     font-weight: 300;
 }
 #logsStructure{
-    height: 100%;
-    line-height: 40px;
-    padding: 0px;
-    margin: 0px;
-    position: static;
-}
-#innerSidebar{
     background: #b8c7ce;
     height: 100%;
     overflow-y: scroll;
     overflow: auto;
+    line-height: 40px;
+    padding: 20px;
+    margin: 0px;
 }
+
 

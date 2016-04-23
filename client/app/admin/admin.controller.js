@@ -5,22 +5,19 @@
 angular.module('logRotator')
 
     .controller('AdminCtrl', ['$scope', 'fileService', '$state', function ($scope, fileService, $state) {
-        console.log('aaaaaaaaaaaaaaaaaaaaaaaaaaa');
+
         /**
          * Display all the folders
          */
 
-        $scope.fileNames=[];
+        $scope.fileNames = [];
         $scope.displayFolders = function () {
             fileService.get(function (data, err) {
-                for (var i = 0; i < data.length; i++) {
-                    var folderName = data[i];
-                    if (folderName.indexOf('.') === 0) {
-                        var a = data.splice(i, 1);
-                        --i;
-                    }
+                if (data.length !== 0) {
+                    $scope.foldersName = data;
+                } else {
+                    $scope.message = 'No Logs';
                 }
-                $scope.foldersName = data;
                 $state.go('admin.folders');
             });
         };
@@ -41,8 +38,6 @@ angular.module('logRotator')
                     $scope.message = '';
                     $scope.index = index;
                     $scope.fileNames = data;
-                    console.log($scope.fileNames)
-
                 }
             });
         };
@@ -62,5 +57,13 @@ angular.module('logRotator')
                 $state.go('admin.folders.files.fileData');
             });
         };
+
+        /**
+         * Back button functionality
+         */
+
+        $scope.back = function () {
+            window.history.back();
+        }
 
     }]);

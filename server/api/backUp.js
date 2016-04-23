@@ -7,31 +7,49 @@
 var fs = require('fs-extra');
 var config = require('./config');
 
-var num = 1;
 var filePath = config.logger_config.filePath || '/home/pooja/Desktop/';
-
+var dir = filePath + 'Logs/';
 
 /**
  * saving logFile in the current dated folder inside logFile
  */
 
-exports.backUp = function (date) {
+exports.backUp = function (date, tempFileName) {
+    var num = 1;
     var month = date.getMonth() + 1;
     var folderName = date.getDate() + '-' + month + '-' + date.getFullYear() + '/';
     var fileName = config.logger_config.fileName || 'logFile';
-    var file = filePath + folderName + fileName + num;
+    var file = dir + folderName + fileName + num;
+    if (!fs.existsSync(dir)) {
+        fs.mkdirSync(dir);
+        copy(file, tempFileName);
+    } else {
+        fs.readdir(dir + folderName, function (err, data) {
+            if (data) {
+                num = data.length + 1;
+            }
+            var file = dir + folderName + fileName + num;
+            copy(file, tempFileName)
+        });
 
-    fs.copy('logFile', file, function (err) {
+    }
+};
+
+/**
+ * copy temp file data to backUp file
+ */
+
+function copy(file, tempFileName) {
+    fs.copy(tempFileName, file, function (err) {
         if (err) {
             console.log(err, "BackUp not completed");
         }
         else {
-            num++;
             console.log("BackUp Done");
-            fs.unlinkSync('logFile');
+            fs.unlinkSync(tempFileName);
         }
     });
-};
+}
 
 /**
  * Display all the folders
@@ -40,7 +58,7 @@ exports.backUp = function (date) {
  */
 
 exports.displayFolders = function (req, res) {
-    fs.readdir(filePath, function (err, data) {
+    fs.readdir(dir, function (err, data) {
         if (data) {
             res.json(data);
         } else {
@@ -57,13 +75,11 @@ exports.displayFolders = function (req, res) {
 
 exports.displayFilesNames = function (req, res) {
     var folderName = req.params.folder;
-    fs.readdir(filePath + folderName, function (err, data) {
+    fs.readdir(dir + folderName, function (err, data) {
         if (data) {
             data.sort(function (a, b) {
-                console.log(a, "           ", b);
-                return fs.statSync(filePath + folderName + '/' + a).mtime.getTime() - fs.statSync(filePath + folderName + '/' + b).mtime.getTime();
+                return fs.statSync(dir + folderName + '/' + a).mtime.getTime() - fs.statSync(dir + folderName + '/' + b).mtime.getTime();
             });
-            console.log(data);
             res.send(data);
         } else {
             res.send(err)
@@ -80,7 +96,7 @@ exports.displayFilesNames = function (req, res) {
 exports.displayFileData = function (req, res) {
     var folderName = req.params.folder;
     var fileName = req.params.file;
-    fs.readFile(filePath + folderName + '/' + fileName, function (err, data) {
+    fs.readFile(dir + folderName + '/' + fileName, function (err, data) {
         if (data) {
             if (data.toString() != "") {
                 var fileData = data.toString();
@@ -93,5 +109,7 @@ exports.displayFileData = function (req, res) {
         }
     })
 };
+
+
 
 
